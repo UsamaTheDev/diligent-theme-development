@@ -2,135 +2,105 @@
 /**
  * diligent functions and definitions
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
  * @package diligent
  */
 
 if ( ! defined( '_S_VERSION' ) ) {
-	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+    // Replace the version number of the theme on each release.
+    define( '_S_VERSION', '1.0.0' );
 }
+
+require_once get_template_directory() . '/inc/walker.php';
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
  */
 function diligent_setup() {
-	/*
-		* Make theme available for translation.
-		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on diligent, use a find and replace
-		* to change 'diligent' to the name of your theme in all the template files.
-		*/
-	load_theme_textdomain( 'diligent', get_template_directory() . '/languages' );
+    // Add theme support for title tag and post thumbnails
+    add_theme_support( 'title-tag' );
+    add_theme_support( 'post-thumbnails' );
 
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+    // Register main navigation menu
+    register_nav_menus(
+        array(
+            'main_menu' => esc_html__( 'Main Menu', 'diligent' ),
+        )
+    );
 
-	/*
-		* Let WordPress manage the document title.
-		* By adding theme support, we declare that this theme does not use a
-		* hard-coded <title> tag in the document head, and expect WordPress to
-		* provide it for us.
-		*/
-	add_theme_support( 'title-tag' );
+    // Add theme support for HTML5 elements
+    add_theme_support(
+        'html5',
+        array(
+            'search-form',
+            'comment-form',
+            'comment-list',
+            'gallery',
+            'caption',
+            'style',
+            'script',
+        )
+    );
 
-	/*
-		* Enable support for Post Thumbnails on posts and pages.
-		*
-		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		*/
-	add_theme_support( 'post-thumbnails' );
-
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus(
-		array(
-			'main_menu' => esc_html__( 'Main Menu', 'diligent' ),
-		)
-	);
-
-	/*
-		* Switch default core markup for search form, comment form, and comments
-		* to output valid HTML5.
-		*/
-	add_theme_support(
-		'html5',
-		array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-			'style',
-			'script',
-		)
-	);
-
-	// Set up the WordPress core custom background feature.
-	add_theme_support(
-		'custom-background',
-		apply_filters(
-			'diligent_custom_background_args',
-			array(
-				'default-color' => 'ffffff',
-				'default-image' => '',
-			)
-		)
-	);
-
-	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
-
-	/**
-	 * Add support for core custom logo.
-	 *
-	 * @link https://codex.wordpress.org/Theme_Logo
-	 */
-	add_theme_support(
-		'custom-logo',
-		array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => true,
-			'flex-height' => true,
-		)
-	);
+    // Add theme support for custom logo
+    add_theme_support(
+        'custom-logo',
+        array(
+            'height'      => 250,
+            'width'       => 250,
+            'flex-width'  => true,
+            'flex-height' => true,
+        )
+    );
 }
 add_action( 'after_setup_theme', 'diligent_setup' );
 
 /**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function diligent_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'diligent_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'diligent_content_width', 0 );
-
-/**
  * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function diligent_widgets_init() {
-	register_sidebar(
-		array(
-			'name'          => esc_html__( 'Sidebar', 'diligent' ),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'diligent' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
+    // Footer Column 1: Logo
+    register_sidebar([
+        'name'          => __('Footer Column 1 Logo', 'diligent'),
+        'id'            => 'footer-column-1',
+        'description'   => __('Widgets in this area will be shown in the footer logo section.', 'diligent'),
+        'before_widget' => '<div class="footer-logo-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '',
+        'after_title'   => '',
+    ]);
+
+    // Footer Column 2: Company Info
+    register_sidebar([
+        'name'          => __('Footer Column 2 (Company)', 'diligent'),
+        'id'            => 'footer-column-2',
+        'description'   => __('Widgets in this area will be shown in the first footer column.', 'diligent'),
+        'before_widget' => '<div class="footer-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="footer-menu-name">',
+        'after_title'   => '</h2>',
+    ]);
+
+    // Footer Column 3: Resources
+    register_sidebar([
+        'name'          => __('Footer Column 3 (Resources)', 'diligent'),
+        'id'            => 'footer-column-3',
+        'description'   => __('Widgets in this area will be shown in the second footer column.', 'diligent'),
+        'before_widget' => '<div class="footer-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="footer-menu-name">',
+        'after_title'   => '</h2>',
+    ]);
+
+    // Footer Column 4: Newsletter
+    register_sidebar([
+        'name'          => __('Footer Column 4 (Newsletter)', 'diligent'),
+        'id'            => 'footer-column-4',
+        'description'   => __('Widgets in this area will be shown in the third footer column.', 'diligent'),
+        'before_widget' => '<div class="footer-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="footer-call-to-action-title">',
+        'after_title'   => '</h2>',
+    ]);
 }
 add_action( 'widgets_init', 'diligent_widgets_init' );
 
@@ -138,36 +108,118 @@ add_action( 'widgets_init', 'diligent_widgets_init' );
  * Enqueue scripts and styles.
  */
 function diligent_scripts() {
-	wp_enqueue_style( 'diligent-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_enqueue_style( 'diligent-secondary-style', get_template_directory_uri() . '/assets/css/style.css', array(), _S_VERSION );
-	wp_enqueue_script( 'diligent-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+    wp_enqueue_style( 'diligent-style', get_stylesheet_uri(), array(), _S_VERSION );
+    wp_enqueue_style( 'diligent-secondary-style', get_template_directory_uri() . '/assets/css/style.css', array(), _S_VERSION );
+    wp_enqueue_style( 'slick-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css', array(), _S_VERSION );
+    wp_enqueue_script( 'diligent-slider', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js', array(), _S_VERSION, true );
+    wp_enqueue_script( 'diligent-navigation', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), _S_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'diligent_scripts' );
 
 /**
- * Implement the Custom Header feature.
+ * Register custom post type for services and its taxonomy
  */
-require get_template_directory() . '/inc/custom-header.php';
+function diligent_post_type_services() {
+    // Register 'services' post type
+    register_post_type('services', array(
+        'label' => 'Services',
+        'description' => 'Services',
+        'public' => true,
+        'show_ui' => true,    
+        'show_in_menu' => true,
+        'show_in_rest' => true,
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'rewrite' => array(
+            'slug' => 'services',
+            'with_front' => true,
+        ),
+        'query_var' => true,
+        'menu_icon' => 'dashicons-admin-site',
+        'supports' => array(
+            'title',
+            'editor',
+            'thumbnail',
+            'revisions',
+        ),
+    ));
 
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
+    // Register custom taxonomy for 'services'
+    register_taxonomy(
+        'service_category', // Taxonomy name
+        'services',         // Post type this taxonomy is associated with
+        array(
+            'label' => 'Service Categories',
+            'rewrite' => array('slug' => 'service-category'),
+            'hierarchical' => true, // Set to false for tag-like behavior
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'show_in_rest' => true,
+        )
+    );
 }
+add_action('init', 'diligent_post_type_services');
 
+/**
+ * Shortcode to display services posts
+ */
+function diligent_services_post_shortcode($atts) {
+    // Set default values for the shortcode attributes
+    $atts = shortcode_atts(
+        array(
+            'number' => '-1', // Default number of posts to display
+            'category' => '', // Option to filter by category
+        ),
+        $atts,
+        'services_posts' // Shortcode name
+    );
+
+    // WP Query to fetch services posts
+    $args = array(
+        'post_type' => 'services', // Custom post type
+        'posts_per_page' => $atts['number'], // Number of posts to display
+    );
+
+    // Add category filter if specified
+    if (!empty($atts['category'])) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'category', // Adjust taxonomy if necessary
+                'field' => 'slug',
+                'terms' => $atts['category'],
+                'operator' => 'IN',
+            ),
+        );
+    }
+
+    // The WP_Query
+    $query = new WP_Query($args);
+
+    // Start output
+    $output = '<div class="services">';
+    $output .= '<h2>Our <span>Services</span></h2>';
+    $output .= '<div class="column-block">';
+
+    // Check if posts are available
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $output .= '<div class="column">';
+            $output .= '<img src="' . get_the_post_thumbnail_url() . '" alt="' . get_the_title() . '">';
+            $output .= '<h4>' . get_the_title() . '</h4>';
+            $output .= '<p>' . get_the_excerpt() . '</p>';
+            $output .= '</div>';
+        }
+    } else {
+        $output .= '<p>No services found.</p>';
+    }
+
+    $output .= '</div>'; // Close column-block div
+    $output .= '</div>'; // Close services div
+
+    // Reset post data
+    wp_reset_postdata();
+
+    return $output;
+}
+add_shortcode('services_posts', 'diligent_services_post_shortcode');

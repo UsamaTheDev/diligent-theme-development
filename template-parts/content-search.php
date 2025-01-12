@@ -22,14 +22,9 @@
 		</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
-
-	<?php diligent_post_thumbnail(); ?>
-
 	<div class="entry-summary">
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->
 
-	<footer class="entry-footer">
-		<?php diligent_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	
 </article><!-- #post-<?php the_ID(); ?> -->

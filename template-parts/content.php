@@ -10,6 +10,7 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<div class="container">
 	<header class="entry-header">
 		<?php
 		if ( is_singular() ) :
@@ -17,19 +18,8 @@
 		else :
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
-
-		if ( 'post' === get_post_type() ) :
-			?>
-			<div class="entry-meta">
-				<?php
-				diligent_posted_on();
-				diligent_posted_by();
-				?>
-			</div><!-- .entry-meta -->
-		<?php endif; ?>
+		?>
 	</header><!-- .entry-header -->
-
-	<?php diligent_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -56,8 +46,5 @@
 		);
 		?>
 	</div><!-- .entry-content -->
-
-	<footer class="entry-footer">
-		<?php diligent_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	</div><!-- .container -->
 </article><!-- #post-<?php the_ID(); ?> -->

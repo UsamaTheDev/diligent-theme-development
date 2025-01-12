@@ -4,6 +4,58 @@
   margin: 0;
 }
 
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/poppins/Poppins-Regular.eot");
+  src: url("../fonts/poppins/Poppins-Regular.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/poppins/Poppins-Regular.woff2") format("woff2"),
+       url("../fonts/poppins/Poppins-Regular.woff") format("woff"),
+       url("../fonts/poppins/Poppins-Regular.ttf") format("truetype"),
+       url("../fonts/poppins/Poppins-Regular.svg#Poppins-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/sans/OpenSans-Regular.eot");
+  src: url("../fonts/sans/OpenSans-Regular.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/sans/OpenSans-Regular.woff2") format("woff2"),
+       url("../fonts/sans/OpenSans-Regular.woff") format("woff"),
+       url("../fonts/sans/OpenSans-Regular.ttf") format("truetype"),
+       url("../fonts/sans/OpenSans-Regular.svg#OpenSans-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("../fonts/plus/PlusJakartaSans-Regular_1.eot");
+  src: url("../fonts/plus/PlusJakartaSans-Regular_1.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/plus/PlusJakartaSans-Regular_1.woff2") format("woff2"),
+       url("../fonts/plus/PlusJakartaSans-Regular_1.woff") format("woff"),
+       url("../fonts/plus/PlusJakartaSans-Regular_1.ttf") format("truetype"),
+       url("../fonts/plus/PlusJakartaSans-Regular_1.svg#PlusJakartaSans-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alexandria";
+  src: url("../fonts/alexandria/Alexandria-Regular_1.eot");
+  src: url("../fonts/alexandria/Alexandria-Regular_1.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/alexandria/Alexandria-Regular_1.woff2") format("woff2"),
+       url("../fonts/alexandria/Alexandria-Regular_1.woff") format("woff"),
+       url("../fonts/alexandria/Alexandria-Regular_1.ttf") format("truetype"),
+       url("../fonts/alexandria/Alexandria-Regular_1.svg#Alexandria-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   background-color: #f5f5f5;
   margin: 0;
@@ -14,33 +66,37 @@ body {
 }
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1424px;
   margin: 0 auto;
   padding: 0 15px;
 }
-/*.diligent-site-header*/
-.diligent-site-header * {
+/*header*/
+.diligent-header * {
   text-decoration: none;
   color: #000;
 }
-
-.diligent-site-header {
+.diligent-header {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+}
+.diligent-header .header-wrapper {
   font-family: "Open Sans";
   background: white;
-  width: 99%;
-  position: fixed;
   margin: 7px;
   padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 20px;
-  z-index: 99;
 }
 .humberger-menu {
   display: none;
 }
-
+.logo {
+  width: 100%;
+  max-width: 22%;
+}
 .logo img {
   width: 138px;
   height: 37px;
@@ -52,22 +108,20 @@ body {
   display: flex;
 }
 
-.main-menu ul li {
-  margin: 0 15px;
+.diligent-header .header-wrapper .main-menu ul li:not(:last-child) {
+  margin-right: 30px;
 }
 .main-menu ul li:hover nav > .sub-menu {
   display: flex !important;
 }
 
-.right-menu {
-  margin-right: 25px;
-}
 .btn-block a {
   background: rgba(0, 85, 150, 1);
   border: none;
   color: white;
   padding: 8px 9px;
   border-radius: 8px;
+  font-family: "Plus Jakarta Sans";
   font-size: 14px;
   font-weight: 600;
 }
@@ -75,7 +129,7 @@ body {
   margin: 0 10px;
 }
 
-/*.diligent-site-header*/
+/*header*/
 
 /*hero*/
 
@@ -103,6 +157,7 @@ body {
 .hero .hero-content .content h1 {
   font-size: 102px;
   font-weight: 600;
+  font-family: "Alexandria";
   line-height: 94.86px;
   letter-spacing: -7px;
 }
@@ -196,6 +251,7 @@ body {
   color: rgba(10, 10, 11, 0.59);
 }
 .services h2 {
+  font-family: "Alexandria";
   font-size: 48px;
   font-weight: 600;
   line-height: 48px;
@@ -235,6 +291,9 @@ body {
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
+}
+.slider {
+  margin-top:96px ;
 }
 .column-block .column img {
   width: 100%;
@@ -287,6 +346,7 @@ body {
   margin-bottom: 87px;
 }
 .link a {
+  font-family: "Alexandria";
   font-size: 24px;
   padding: 11px 102px 11px 102px;
   border-radius: 10px;
@@ -449,11 +509,21 @@ body {
   border-radius: 24px;
 }
 .last-block .content h2 {
+  font-family: "Alexandria";
   color: white;
   font-size: 66px;
   font-weight: 700;
   line-height: 64.68px;
   text-align: center;
+}
+.slick-slide{
+  margin-left: 14px;
+}
+.slick-slide img{
+  width: 339px !important;
+  height: 450px;
+  border-radius: 12px;
+  object-fit: cover;
 }
 .last-block .content span {
   color: var(--Primary-Primary300, rgba(135, 203, 255, 1));
@@ -501,13 +571,13 @@ body {
   margin-top: 0;
   text-transform: uppercase;
 }
-.footer-menu-list {
+.footer-content-column .footer-menu ul {
   list-style: none;
   margin-bottom: 44px;
   margin-top: 30px;
   padding-left: 0;
 }
-.footer-menu-list li {
+.footer-content-column .footer-menu ul li {
   margin-top: 15px;
   font-size: 14px;
   font-weight: 400;
@@ -576,6 +646,10 @@ input[type="submit"] {
   border-radius: 8px;
   margin-bottom: 12px;
 }
+.mail-form-wrap .mail-form-input::placeholder {
+  color: white;
+} 
+
 input[type="email"] {
   background: transparent;
   color: white;
@@ -683,6 +757,11 @@ input[type="email"]:focus {
   line-height: 22px;
   margin-top: 21px;
 }
+
+.footer-logo img {
+  width: 100% !important;
+}
+
 .footer-logo p {
   color: rgba(240, 240, 240, 1);
   font-family: Open Sans;
@@ -713,6 +792,10 @@ input[type="email"]:focus {
 
 /*footer*/
 @media screen and (max-width: 992px) {
+  .logo {
+    width: 100%;
+    max-width: 32%;
+}
   .hero .hero-content .content {
     width: 100%;
     max-width: 50%;
@@ -798,13 +881,12 @@ input[type="email"]:focus {
   .right-menu ul li {
     margin: 0px;
   }
-  .diligent-site-header {
+  .diligent-header .header-wrapper {
     flex-direction: column;
     justify-content: flex-start;
     align-items: start;
     width: 100%;
     margin: 0;
-    border-radius: 0;
     overflow: hidden;
   }
   .btn-block {
@@ -828,7 +910,7 @@ input[type="email"]:focus {
 
   .right-menu ul,
   .main-menu ul {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
   .right-menu,
   .main-menu ul {
@@ -846,8 +928,7 @@ input[type="email"]:focus {
   .humberger-menu {
     display: block;
     position: absolute;
-    right: 25px;
-    top: 10px;
+    right: 9%;
   }
 
   .humberger-menu-line {
@@ -899,6 +980,9 @@ input[type="email"]:focus {
   .last-block .content h2 {
     font-size: 35px;
     line-height: 45.68px;
+  }
+  .slider {
+    margin-top:30px ;
   }
   .af-hero .af-wrapper {
     flex-direction: column;
@@ -1005,34 +1089,102 @@ input[type="email"]:focus {
   .blocks .left-block h2 {
     font-size: 65px;
     line-height: 70.44px;
-}
-.last-block .content h2 {
+  }
+  .last-block .content h2 {
     font-size: 17px;
+    padding: 0 20px;
     line-height: 29.68px;
-}
-.blocks .right-block h2 {
+  }
+  .blocks .right-block h2 {
     font-size: 60px;
     line-height: 70.44px;
-}
-.blocks .right-block h3 span {
+  }
+  .blocks .right-block h3 span {
     display: inline;
-}
-.blocks .right-block h3 {
+  }
+  .blocks .right-block h3 {
     font-size: 26px;
     line-height: 34.76px;
-}
-.blocks .left-block h2 {
+  }
+  .blocks .left-block h2 {
     font-size: 60px;
     line-height: 70.44px;
-}
-.blocks .left-block h3 span {
+  }
+  .blocks .left-block h3 span {
     display: inline;
-}
-.blocks .left-block h3 {
+  }
+  .blocks .left-block h3 {
     font-size: 26px;
     line-height: 34.76px;
-}
-.last-block img {
+  }
+  .last-block img {
     height: 200px;
+  }
 }
+
+/* Ensure the menu and dropdown are set up correctly */
+.main-menu nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-menu nav ul li {
+  position: relative;
+}
+
+.main-menu nav ul li a {
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+}
+
+/* Make sure the dropdown menu is hidden by default */
+.dropdown-menu {
+  display: none !important; /* Initially hidden */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Show the dropdown when hovering over the parent item */
+.menu-item:hover > .dropdown-menu {
+  display: block !important; /* Show the dropdown */
+}
+
+/* Style the links inside the dropdown */
+.dropdown-menu li a {
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+}
+
+/* Optional hover effect for dropdown items */
+.dropdown-menu li a:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+/* Style for the caret (dropdown indicator) */
+.caret {
+  margin-left: 5px;
+  font-size: 0.8em;
+}
+
+@media screen and (max-width: 768px) {
+  .dropdown-menu {
+    display: none; /* Make sure the dropdown is hidden by default */
+  }
+
+  .menu-item.open > .dropdown-menu {
+    display: block !important; /* Show the dropdown when the parent item has "open" class */
+  }
+}
+
+main#primary {
+  padding-top: 100px;
 }
