@@ -1,6 +1,6 @@
 # Diligent Theme Development
 
-A custom WordPress theme built as part of the Diligent Technologies technical assessment. The theme is developed using **Advanced Custom Fields (ACF)** and adheres to modern WordPress development practices.
+A custom WordPress theme built as part of the Diligent Technologies technical assessment. The theme is developed using **Advanced Custom Fields (ACF)** and adheres to modern WordPress development practices. Use the Landing Page template.
 
 ## Features
 - **Custom Post Types**: Built-in post types for specific use cases.
